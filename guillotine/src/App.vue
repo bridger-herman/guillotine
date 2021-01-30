@@ -1,22 +1,19 @@
 <template>
   <div id="app">
-    <ul class="player-list" v-for="player of players" v-bind:key="player.name">
-      <li><p>{{ player.name }}</p></li>
-    </ul>
+    <PlayerList/>
+    <ActionHand/>
   </div>
 </template>
 
 <script>
-import api from './api.js';
+import api from '@/api.js';
+import PlayerList from './components/PlayerList.vue';
+import ActionHand from './components/ActionHand.vue'
 
 export default {
   name: 'App',
   components: {
-  },
-  asyncComputed: {
-    players: function() {
-      return api.getPlayers();
-    }
+    PlayerList, ActionHand
   },
   data() {
     return {
@@ -24,11 +21,17 @@ export default {
     }
   },
   mounted: function() {
+    api.createPlayer({
+      name: 'Bridger',
+    });
+    this.$store.commit('setPlayerName', this.playerName);
     // api.createPlayer({
     //   name: 'Bridger',
     // }).then(() => {
-    //   console.log(this.players);
-    //   // api.getPlayers().then((players) => console.log(players));
+      // api.getPlayers().then((players) => {
+      //   this.$store.commit('setPlayerList', players)
+      //   console.log(this.$store.state.playerList);
+      // });
     // });
   }
 }

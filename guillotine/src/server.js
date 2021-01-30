@@ -88,7 +88,7 @@ function init() {
   // Create the dynamic REST resource for our Post model
   let userResource = finale.resource({
     model: Player,
-    endpoints: ['/players', '/players/:id']
+    endpoints: ['/players', '/players/:name']
   })
 
   // Resets the database and launches the express app on :8081
