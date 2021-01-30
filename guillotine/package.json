@@ -8,7 +8,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "core-js": "^3.6.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "finale-rest": "^1.1.1",
+    "sequelize": "^6.5.0",
+    "sqlite3": "^5.0.1",
     "vue": "^2.6.11"
   },
   "devDependencies": {

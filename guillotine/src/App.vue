@@ -7,11 +7,19 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import api from './api.js';
 
 export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  mounted: function() {
+    api.createPlayer({
+      name: 'Bridger',
+    }).then(() => {
+      api.getPlayers().then((players) => console.log(players));
+    });
   }
 }
 </script>
