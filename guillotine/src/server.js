@@ -86,7 +86,7 @@ function init() {
   })
 
   // Create the dynamic REST resource for our Post model
-  let userResource = finale.resource({
+  finale.resource({
     model: Player,
     endpoints: ['/players', '/players/:name']
   })

@@ -1,12 +1,9 @@
-import Vue from 'vue'
+import Vue, { createApp } from 'vue';
 import App from './App.vue'
 import AsyncComputed from 'vue-async-computed'
 import Vuex from 'vuex'
 
-Vue.config.productionTip = false
-
 Vue.use(AsyncComputed);
-Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
@@ -25,7 +22,4 @@ const store = new Vuex.Store({
   }
 })
 
-new Vue({
-  store,
-  render: h => h(App),
-}).$mount('#app')
+createApp(App).use(store).mount('#app')
