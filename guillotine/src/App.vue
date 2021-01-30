@@ -1,25 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ul class="player-list" v-for="player of players" v-bind:key="player.name">
+      <li><p>{{ player.name }}</p></li>
+    </ul>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import api from './api.js';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  },
+  asyncComputed: {
+    players: function() {
+      return api.getPlayers();
+    }
+  },
+  data() {
+    return {
+      playerName: 'Bridger',
+    }
   },
   mounted: function() {
-    api.createPlayer({
-      name: 'Bridger',
-    }).then(() => {
-      api.getPlayers().then((players) => console.log(players));
-    });
+    // api.createPlayer({
+    //   name: 'Bridger',
+    // }).then(() => {
+    //   console.log(this.players);
+    //   // api.getPlayers().then((players) => console.log(players));
+    // });
   }
 }
 </script>
