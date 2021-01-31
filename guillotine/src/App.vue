@@ -30,6 +30,9 @@ export default {
     api.getActionCards().then((cards) => {
       this.$store.commit('setActionCards', cards);
     });
+
+    // this.$root.$refs.ActionHand.addActionCardFromDeck();
+    this.$root.$emit('addActionCardFromDeck');
   }
 }
 </script>
