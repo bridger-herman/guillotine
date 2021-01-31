@@ -29,5 +29,12 @@ export default {
   },
   deletePlayer (id) {
     return this.execute('delete', `/players/${id}`)
-  }
+  },
+
+  getActionCards () {
+    return this.execute('get', '/actionCards')
+  },
+  getActionCard (id) {
+    return this.execute('get', `/actionCards/${id}`)
+  },
 }

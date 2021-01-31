@@ -6,15 +6,17 @@ const store = new Vuex.Store({
   state: {
     playerName: '',
     playerList: [],
+    actionCards: [],
   },
   mutations: {
     setPlayerName(state, name) {
       state.playerName = name;
     },
     setPlayerList(state, list) {
-      console.log('setting player list');
-      console.log(list);
       state.playerList = list;
+    },
+    setActionCards(state, list) {
+      state.actionCards = list;
     }
   }
 })

@@ -21,7 +21,7 @@ Array.prototype.shuffle = function() {
 
 // Get the contents of the action cards dir
 var actionCards = [];
-var currentActionIndex = 0;
+var currentActionIndex = 1;
 const NUMBER_ACTION_CARDS = 5;
 fs.readdir('src/assets/action_cards', (err, contents) => {
   if (err) {
@@ -51,11 +51,11 @@ function init() {
     },
     // https://stackoverflow.com/a/25897153
     actionsHand: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       defaultValue: function() {
         let hand = [];
         for (let i = 0; i < NUMBER_ACTION_CARDS; i++) {
-          hand.push(actionCards[currentActionIndex]);
+          hand.push(currentActionIndex);
           currentActionIndex++;
         }
         return JSON.stringify(hand);
@@ -77,7 +77,11 @@ function init() {
           return this.setDataValue('noblesHand', JSON.stringify(val));
       }
     }
-  })
+  });
+
+  let ActionCard = database.define('actionCards', {
+    imgPath: Sequelize.STRING,
+  });
 
   // Initialize finale
   finale.initialize({
@@ -91,10 +95,26 @@ function init() {
     endpoints: ['/players', '/players/:name']
   })
 
+  finale.resource({
+    model: ActionCard,
+    endpoints: ['/actionCards', '/actionCards/:id']
+  })
+
   // Resets the database and launches the express app on :8081
   database
     .sync({ force: true })
     .then(() => {
+      // Add some test data
+      Player.create({
+        name: 'Bridger'
+      });
+
+      for (const card of actionCards) {
+        ActionCard.create({
+          imgPath: card,
+        });
+      }
+
       app.listen(8081, () => {
         console.log('listening to port localhost:8081')
       })

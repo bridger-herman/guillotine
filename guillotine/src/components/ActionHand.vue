@@ -19,8 +19,9 @@ export default {
   },
   methods: {
     // https://stackoverflow.com/a/47480286
-    getActionCardUrl(url) {
-      return require('../assets/action_cards/' + url);
+    getActionCardUrl(cardId) {
+      let cardName = this.$store.state.actionCards[cardId - 1].imgPath;
+      return require('../assets/action_cards/' + cardName);
     }
   }
 }

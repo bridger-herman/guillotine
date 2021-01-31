@@ -19,19 +19,17 @@ export default {
     }
   },
   mounted: function() {
-    api.createPlayer({
-      name: this.playerName,
-    }).finally(() => {
+    // api.createPlayer({
+    //   name: this.playerName,
+    // }).finally(() => {
       this.$store.commit('setPlayerName', this.playerName);
       api.getPlayers().then((players) => {
         this.$store.commit('setPlayerList', players)
-        console.log(this.$store.state.playerList);
       });
-    });
-    // api.createPlayer({
-    //   name: 'Bridger',
-    // }).then(() => {
     // });
+    api.getActionCards().then((cards) => {
+      this.$store.commit('setActionCards', cards);
+    });
   }
 }
 </script>
