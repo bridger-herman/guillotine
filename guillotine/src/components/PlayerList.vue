@@ -1,25 +1,25 @@
 <template>
 <div class="player-list">
-  <ul v-for="player of players" v-bind:key="player.name">
-    <li><p>{{ player.name }}</p></li>
-  </ul>
+  <div v-for="player of players" v-bind:key="player.name">
+    <span><p>{{ player.name }}</p></span>
+  </div>
 </div>
 </template>
 
 <script>
-import api from '@/api.js';
+// import api from '@/api.js';
 
 export default {
-  asyncComputed: {
+  computed: {
     players: function() {
-      return api.getPlayers();
+      return this.$store.state.playerList;
     }
   },
 }
 </script>
 
 <style>
-  .player-list {
-    width: 10rem;
-  }
+/* .player-list {
+  height: 100vh;
+} */
 </style>

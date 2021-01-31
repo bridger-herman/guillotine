@@ -1,31 +1,40 @@
 <template>
 <div class="action-hand">
-  <!-- <div v-for="card of actionCards" v-bind:key="card">
-    <img v-bind:src="'@/assets/action_cards/' + card" alt="">
-  </div> -->
-  <img src="@/assets/action_cards/actionss_set3_2_1.jpg" alt="">
+  <img class="action-card" v-for="card of actionCards" v-bind:key="card" v-bind:src="getActionCardUrl(card)">
 </div>
 </template>
 
 <script>
-import api from '@/api.js';
+// import api from '@/api.js';
 
 export default {
-  asyncComputed: {
+  computed: {
     actionCards: function() {
-      return api.getPlayer(this.$store.state.playerName).then((player) => {
-        let cards = player.actionsHand;
-        // cards = cards.map((c) => '../assets/action_cards/' + c);
-        return cards;
-      });
+      let player = this.$store.state.playerList.find((p) => p.name == this.$store.state.playerName);
+      return player ? player.actionsHand : null;
     }
   },
   mounted: function() {
 
+  },
+  methods: {
+    // https://stackoverflow.com/a/47480286
+    getActionCardUrl(url) {
+      return require('../assets/action_cards/' + url);
+    }
   }
 }
 </script>
 
 <style>
+.action-hand {
+  display: flex;
+  justify-content: space-around;
+}
 
+.action-hand > img.action-card {
+  margin: 0.5rem;
+  border-radius: 10px;
+  width: 18%; /* 1/5 of the width plus a little to spare */
+}
 </style>

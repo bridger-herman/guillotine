@@ -1,8 +1,6 @@
 <template>
-  <div id="app">
-    <PlayerList/>
-    <ActionHand/>
-  </div>
+  <PlayerList/>
+  <ActionHand/>
 </template>
 
 <script>
@@ -22,16 +20,17 @@ export default {
   },
   mounted: function() {
     api.createPlayer({
-      name: 'Bridger',
+      name: this.playerName,
+    }).finally(() => {
+      this.$store.commit('setPlayerName', this.playerName);
+      api.getPlayers().then((players) => {
+        this.$store.commit('setPlayerList', players)
+        console.log(this.$store.state.playerList);
+      });
     });
-    this.$store.commit('setPlayerName', this.playerName);
     // api.createPlayer({
     //   name: 'Bridger',
     // }).then(() => {
-      // api.getPlayers().then((players) => {
-      //   this.$store.commit('setPlayerList', players)
-      //   console.log(this.$store.state.playerList);
-      // });
     // });
   }
 }
@@ -45,5 +44,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: grid;
+  grid-template-columns: 10rem auto;
+}
+
+p {
+  width: min-content;
 }
 </style>

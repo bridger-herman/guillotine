@@ -1,9 +1,6 @@
-import Vue, { createApp } from 'vue';
+import { createApp } from 'vue';
 import App from './App.vue'
-import AsyncComputed from 'vue-async-computed'
 import Vuex from 'vuex'
-
-Vue.use(AsyncComputed);
 
 const store = new Vuex.Store({
   state: {
